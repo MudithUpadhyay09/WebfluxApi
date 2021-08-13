@@ -20,10 +20,14 @@ public class RouterConfig {
     @Autowired
     private TeacherStreamHandler streamHandler;
 
+    /**
+     * router Function is a return type 
+     * @return
+     */
     @Bean
     public RouterFunction<ServerResponse> routerFunction(){
         return RouterFunctions.route()
-                .GET("/router/teachers",handler::loadTeacher)
+                .GET("/router/teacher",handler::loadTeacher)
                 .GET("/router/teacher/stream",streamHandler::getTeachers)
                 .GET("/router/teacher/{input}",handler::findTeacher)
                 .POST("/router/teacher/save",handler::saveTeacher)

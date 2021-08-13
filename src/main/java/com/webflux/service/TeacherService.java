@@ -15,12 +15,12 @@ import java.util.List;
 public class TeacherService {
 
     @Autowired
-    private TeacherDao dao;
+    private TeacherDao teacherdao;
 
 	public List<Teacher> loadAllTeacher() {
 		// printing execution time 
 		 long start = System.currentTimeMillis();
-		 List<Teacher> teachers = dao.getTeacher();
+		 List<Teacher> teachers = teacherdao.getTeacher();
 		 long end = System.currentTimeMillis();
 		 // time difference 
 		 System.out.println("Total execution time : " + (end - start));
@@ -31,7 +31,7 @@ public class TeacherService {
 
 	public Flux<Teacher> loadAllTeacherStream() {
 		long start = System.currentTimeMillis();
-        Flux<Teacher> teachers = dao.getTeachersStream();
+        Flux<Teacher> teachers = teacherdao.getTeachersStream();
         long end = System.currentTimeMillis();
         System.out.println("Total execution time : " + (end - start));
         return teachers;

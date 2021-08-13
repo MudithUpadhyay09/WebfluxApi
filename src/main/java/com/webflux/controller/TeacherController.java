@@ -16,19 +16,19 @@ import java.util.List;
 @RequestMapping("/Teacher")
 public class TeacherController {
 	@Autowired
-    private TeacherService service;
+    private TeacherService teacherservice;
 
 
     @GetMapping
     public List<Teacher> getAllTeacher() {
-        return service.loadAllTeacher();
+        return teacherservice.loadAllTeacher();
     }
-
+    // produces is used to send my data to subscriber(browser) as a event stream reactive stream
     @GetMapping(value = "/stream",produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     // In reactive programming we do not use list
-    //we use Flux because it is a publisher
+    //We use Flux because it is a publisher
     public Flux<Teacher> getAllTeacherStream() {
-        return service.loadAllTeacherStream();
+        return teacherservice.loadAllTeacherStream();
     }
 
 }

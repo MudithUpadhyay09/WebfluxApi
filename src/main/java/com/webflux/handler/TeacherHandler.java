@@ -16,18 +16,19 @@ import reactor.core.publisher.Mono;
 public class TeacherHandler {
 
     @Autowired
-    private TeacherDao dao;
+    private TeacherDao teacherdao;
 
-
+    // load teacher is a method name 
+    // server Request
     public Mono<ServerResponse> loadTeacher(ServerRequest request){
-        Flux<Teacher> teacherList = dao.getTeacherList();
+        Flux<Teacher> teacherList = teacherdao.getTeacherList();
         return ServerResponse.ok().body(teacherList,Teacher.class);
     }
 
     public Mono<ServerResponse> findTeacher(ServerRequest request){
         int teacherId= Integer.valueOf( request.pathVariable("input"));
      // dao.getTeacherList().filter(c->c.getId()==teacherId).take(1).single();
-        Mono<Teacher> teacherMono = dao.getTeacherList().filter(c -> c.getId() == teacherId).next();
+        Mono<Teacher> teacherMono = teacherdao.getTeacherList().filter(c -> c.getId() == teacherId).next();
         return ServerResponse.ok().body(teacherMono,Teacher.class);
     }
     

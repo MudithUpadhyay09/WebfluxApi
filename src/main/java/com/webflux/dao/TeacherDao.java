@@ -24,11 +24,13 @@ public class TeacherDao {
             e.printStackTrace();
         }
     }
-
-    public List<Teacher> getTeacher()  {
+	
+	// Method that return list of object
+    
+	public List<Teacher> getTeacher()  {
        // wants to return 50 object then we
-      // peek is used to print the process count the time 
-      // for each count 
+       // peek is used to print the process count 
+       // the time for each count 
     	return  IntStream.rangeClosed(1, 10)
                 .peek(TeacherDao::sleepExecution)
                 .peek(i -> System.out.println("processing count : " + i))
@@ -43,16 +45,30 @@ public class TeacherDao {
         		// delay is used as sleep
                 .delayElements(Duration.ofSeconds(1))
                 .doOnNext(i -> System.out.println("processing count in stream flow : " + i))
-                .map(i -> new Teacher());
+                .map(i -> new Teacher(i,"teacher"+i));
     }
 
 
     public Flux<Teacher> getTeacherList()  {
         return Flux.range(1,50)
                 .doOnNext(i -> System.out.println("processing count in stream flow : " + i))
-                .map(i -> new Teacher());
+                .map(i -> new Teacher(i, "teacher"+i));
     }
-
-
-
+    
 }
+
+
+
+
+
+
+
+
+
+//public Flux<Teacher> getTeacherList()  {
+//    return Flux.range(1,50)
+//            .doOnNext(i -> System.out.println("processing count in stream flow : " + i))
+//            .map(i -> new Teacher());
+//}
+// handler & router also
+
